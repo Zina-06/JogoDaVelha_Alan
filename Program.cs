@@ -27,7 +27,6 @@ namespace JogoDaVelha_Alan
             //Pergunta o nome dos jogadores
             Console.Write("Jogador 1: ");
             string jogador1 = Console.ReadLine();
-
             Console.Write("Jogador 2: ");
             string jogador2 = Console.ReadLine();
 
@@ -70,7 +69,7 @@ namespace JogoDaVelha_Alan
 
             while (tentativas < 9)
             {
-                //Substitui o valor em sua respectiva casa
+                // Substitui o valor em sua respectiva casa
                 for (int i = 0; i < matriz.GetLength(0); i++)
                 {
                     for (int j = 0; j < matriz.GetLength(1); j++)
@@ -83,20 +82,19 @@ namespace JogoDaVelha_Alan
                     }
                 }
 
-                //Imprime a matriz
+                // Imprime a matriz
                 for (int i = 0; i < matriz.GetLength(0); i++)
                 {
                     for (int j = 0; j < matriz.GetLength(1); j++)
                     {
                         Console.Write($" [{matriz[i, j]}] ");
                     }
-
                     Console.WriteLine();
                 }
 
-                //Checagem de vitória nas diagonais
-                if (matriz[0, 0] == matriz[1, 1] && matriz[1, 1] == matriz[2, 2] ||
-                    matriz[0, 2] == matriz[1, 1] && matriz[1, 1] == matriz[2, 0])
+                // Checagem de vitória nas diagonais
+                if ((matriz[0, 0] == matriz[1, 1] && matriz[1, 1] == matriz[2, 2]) ||
+                    (matriz[0, 2] == matriz[1, 1] && matriz[1, 1] == matriz[2, 0]))
                 {
                     Console.WriteLine("------------");
                     Console.WriteLine("Fim de jogo!");
@@ -105,23 +103,30 @@ namespace JogoDaVelha_Alan
                     break;
                 }
 
-                //Checagem de vitória nas linhas
-                if (matriz[0, 0] == matriz[0, 1] && matriz[0, 1] == matriz[0, 2] ||
-                    matriz[1, 0] == matriz[1, 1] && matriz[1, 1] == matriz[1, 2] ||
-                    matriz[2, 0] == matriz[2, 1] && matriz[2, 1] == matriz[2, 2])
+                // Checagem de vitória nas linhas
+                for (int i = 0; i < 3; i++)
                 {
-                    Console.WriteLine("vitória");
-                    break;
+                    if ((matriz[i, 0] == matriz[i, 1] && matriz[i, 1] == matriz[i, 2]))
+                    {
+                        Console.WriteLine("vitória");
+                        return;
+                    }
                 }
 
-                //Checagem de vitória nas colunas
-                if (matriz[0, 0] == matriz[1, 0] && matriz[1, 0] == matriz[2, 0])
+                // Checagem de vitória nas colunas
+                for (int j = 0; j < 3; j++)
                 {
+                    if ((matriz[0, j] == matriz[1, j] && matriz[1, j] == matriz[2, j]))
+                    {
+                        Console.WriteLine("vitória");
+                        return;
+                    }
                 }
 
-            }
+                tentativas++;
 
-            if (turno == "X")
+                // Alternância de turnos
+                if (turno == "X")
                 {
                     turno = "O";
                 }
@@ -130,19 +135,17 @@ namespace JogoDaVelha_Alan
                     turno = "X";
                 }
 
-
-             if (jogador == jogador1)
-             {
-                 jogador = jogador2;
-             }
-             else
-             {
-                 jogador = jogador1;
-             }
+                if (jogador == jogador1)
+                {
+                    jogador = jogador2;
+                }
+                else
+                {
+                    jogador = jogador1;
+                }
 
                 Console.Write($"Escolha a posição, {jogador}({turno}): ");
                 jogada = Console.ReadLine();
-
 
                 while (!indexNumeros.Contains(jogada))
                 {
@@ -150,14 +153,10 @@ namespace JogoDaVelha_Alan
                     jogada = Console.ReadLine();
                 }
 
-            tentativas++;
-            Console.Clear();
-
-
-
-
-
+                Console.Clear();
             }
+            Console.ReadKey();
+        }
     }
 
     }
