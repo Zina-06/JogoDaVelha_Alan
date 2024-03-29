@@ -133,7 +133,9 @@ namespace JogoDaVelha_Alan
 
                 if(tentativas == 9)
                 {
+                    Console.Clear();
                     Console.WriteLine("Empato");
+                    break;
                 }
             }
             
